@@ -15,10 +15,10 @@
         @include('layout.navheader.index')
 
         <!-- 2. Contenedor principal con fila (Row) -->
-        <div class="container-fluid p-4">
+        <div class="container-fluid  p-2 p-md-4 pb-5">
             <div class="row">
                 @include('layout.siedvar.index')
-                <main class="col-md-9 col-lg-10">
+                <main class="col-md-9 col-lg-9">
                     @yield('contenido')
                 </main>
             </div>
