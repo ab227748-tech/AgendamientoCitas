@@ -5,7 +5,7 @@
 @endsection
 
 @section('contenido')
-    <div class="container-fluid col 10 justify-content-center m-0">
+    <div class="container-fluid p-0">
         <div class="row">
             <!-- Contenedor 2: Tarjeta Quote al lado de la primera -->
             <div class="mb-4">
@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="row">
                             <!-- Contenedor 1: Información de Barbería -->
-                            <div class="col-md-8">
+                            <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                                 <style>
                                     .text-gold { color: #dca73a !important; }
                                     .bg-gold { background-color: #dca73a !important; }
@@ -127,10 +127,13 @@
                                 </div>
                             </div>
                             <!-- Contenedor 2: Tarjeta Quote al lado de la primera -->
-                            <div class="col-md-4">
-                                <div class="card shadow">
+                            <div class="col-12 col-xl-4">
+                                <div class="card shadow rounded-4">
                                     <div class="card-body">
-                                        <h5>Nuestra Galeria</h5>
+                                        <div class="container-fluid p-2 d-flex align-items-center ">
+                                            <i class="bi bi-camera  me-2 " style="color: #dca73a; font-size:25px"></i>
+                                            <span>Nuestra Galeria</span>
+                                        </div>
                                         <div id="carouselExampleIndicators" class="carousel slide">
                                             <div class="carousel-indicators">
                                                 <button type="button" data-bs-target="#carouselExampleIndicators"
@@ -169,9 +172,9 @@
                                     </div>
                                     <div class="card-footer text-center">
                                         <div class="container-fluid p-2">
-                                            <i>4.9/50</i>
+                                            <i class="bi bi-star-fill">4.9/5.0</i>
                                             <br>
-                                            <span>+480 Clientes Satisfechos</span>
+                                            <span>+480 Clientes satisfechos este mes </span>
                                         </div>
                                     </div>
                                 </div>
