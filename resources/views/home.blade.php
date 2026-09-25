@@ -130,6 +130,7 @@
                             <div class="col-md-4">
                                 <div class="card shadow">
                                     <div class="card-body">
+                                        <h5>Nuestra Galeria</h5>
                                         <div id="carouselExampleIndicators" class="carousel slide">
                                             <div class="carousel-indicators">
                                                 <button type="button" data-bs-target="#carouselExampleIndicators"
@@ -142,13 +143,16 @@
                                             </div>
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
-                                                    <img src="Icons/Carrusel1.png" class="d-block w-100" alt="...">
+                                                    <img src="img/Carrusel1Barberia.png" class="d-block w-100"
+                                                        alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="Icons/Carrusel2.png" class="d-block w-100" alt="...">
+                                                    <img src="img/Carrusel2Barberia.png" class="d-block w-100"
+                                                        alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="Icons/Carrusel3.png" class="d-block w-100" alt="...">
+                                                    <img src="img/Carrusel3Barberia.png" class="d-block w-100"
+                                                        alt="...">
                                                 </div>
                                             </div>
                                             <button class="carousel-control-prev" type="button"
@@ -161,6 +165,13 @@
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
                                             </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <div class="container-fluid p-2">
+                                            <i>4.9/50</i>
+                                            <br>
+                                            <span>+480 Clientes Satisfechos</span>
                                         </div>
                                     </div>
                                 </div>
