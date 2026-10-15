@@ -181,15 +181,15 @@
                                             </div>
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
-                                                    <img src="img/Carrusel1Barberia.png" class="d-block w-100"
+                                                    <img src="img/carrusel1Barberia.png" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="img/Carrusel2Barberia.png" class="d-block w-100"
+                                                    <img src="img/carrusel2Barberia.png" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="img/Carrusel3Barberia.png" class="d-block w-100"
+                                                    <img src="img/carrusel3Barberia.png" class="d-block w-100"
                                                         alt="...">
                                                 </div>
                                             </div>
