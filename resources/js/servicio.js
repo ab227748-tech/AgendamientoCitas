@@ -14,3 +14,5 @@ function ServicioUpdate() {
         document.getElementById('editartiempo').value = celdas[3].textContent.trim();
     });
 }
+
+ServicioUpdate();
