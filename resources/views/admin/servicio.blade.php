@@ -1,4 +1,4 @@
-@extends('layouT.AdminMain')
+@extends('layout.AdminMain')
 
 @section('titulo')
     Servicio
