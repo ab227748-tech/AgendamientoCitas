@@ -39,7 +39,7 @@
       </ul>
 
       <!-- Botón Admin al final -->
-      <a href="#" class="btn btn-outline-warning text-dark border-warning d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0 ms-lg-3">
+      <a href="/login" class="btn btn-outline-warning text-dark border-warning d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0 ms-lg-3">
         <i class="bi bi-shield-lock-fill text-warning"></i>
         Acceso Admin
       </a>

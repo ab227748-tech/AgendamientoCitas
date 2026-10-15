@@ -17,8 +17,7 @@
         <!-- 2. Contenedor principal con fila (Row) -->
         <div class="container-fluid  p-2 p-md-4 pb-5">
             <div class="row">
-                @include('layout.siedvar.index')
-                <main class="col-md-9 col-lg-9">
+                <main class="col-md-12 col-lg-12">
                     @yield('contenido')
                 </main>
             </div>
