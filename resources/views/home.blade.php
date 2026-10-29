@@ -7,76 +7,15 @@
 @section('contenido')
     <div class="container-fluid p-0">
         <div class="row">
-            <!-- Contenedor 2: Tarjeta Quote al lado de la primera -->
             <div class="mb-4">
                 <div class="card shadow">
                     <div class="card-body">
                         <div class="row">
-                            <!-- Contenedor 1: Información de Barbería -->
+                            <!-- Contenedor 1: Informacion de Barberia -->
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <style>
-                                    .text-gold {
-                                        color: #dca73a !important;
-                                    }
-
-                                    .bg-gold {
-                                        background-color: #dca73a !important;
-                                    }
-
-                                    .border-gold {
-                                        border-color: #dca73a !important;
-                                    }
-
-                                    .bg-gold-light {
-                                        background-color: rgba(220, 167, 58, 0.1) !important;
-                                    }
-
-                                    .font-serif {
-                                        font-family: 'Playfair Display', Georgia, serif;
-                                    }
-
-                                    .barber-icon {
-                                        font-size: 5rem;
-                                        opacity: 0.2;
-                                        transform: rotate(-45deg);
-                                        line-height: 0.8;
-                                    }
-
-                                    .border-dashed {
-                                        border-bottom-style: dashed !important;
-                                    }
-
-                                    /* Animaciones hover */
-                                    .btn-hover-solid {
-                                        transition: all 0.3s ease;
-                                    }
-
-                                    .btn-hover-solid:hover {
-                                        transform: translateY(-3px);
-                                        box-shadow: 0 6px 15px rgba(220, 167, 58, 0.4) !important;
-                                    }
-
-                                    .btn-hover-outline {
-                                        transition: all 0.3s ease;
-                                    }
-
-                                    .btn-hover-outline:hover {
-                                        background-color: #dca73a !important;
-                                        color: #212529 !important;
-                                        transform: translateY(-3px);
-                                        box-shadow: 0 6px 15px rgba(220, 167, 58, 0.4) !important;
-                                    }
-
-                                    .service-price {
-                                        color: #a17306;
-                                        font-family: 'Cinzel', serif;
-                                        font-weight: 700;
-                                        font-size: 1.15rem;
-                                    }
-                                </style>
                                 <div class="card border-0 h-100" style="border-radius: 12px;">
                                     <div class="card-body p-3">
-                                        <!-- Header section -->
+                                        <!-- Header -->
                                         <div class="d-flex justify-content-between align-items-start mb-3">
                                             <span
                                                 class="badge rounded-pill border border-gold bg-gold-light text-gold py-2 px-3 fw-bold"
@@ -86,14 +25,12 @@
                                             <i class="bi bi-scissors text-gold barber-icon mt-n2"></i>
                                         </div>
 
-                                        <!-- Title -->
                                         <h1 class="font-serif fw-bold text-dark mb-3"
                                             style="font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1.1; letter-spacing: -0.5px; font-family: 'Playfair Display', serif; letter-spacing: -0.01em; color: #161a23;">
                                             El Arte del Corte <br>
                                             <span class="text-gold fst-italic">Hecho Perfección.</span>
                                         </h1>
 
-                                        <!-- Description -->
                                         <p class="text-secondary text-dark mb-4"
                                             style="line-height: 1.7; font-size: 1.05rem;">
                                             Bienvenido a <span class="text-dark fw-semibold">Imperium Barbershop</span>.
@@ -102,7 +39,6 @@
                                             una experiencia de cuidado y distinción diseñada exclusivamente para ti.
                                         </p>
 
-                                        <!-- Buttons -->
                                         <div class="d-flex flex-wrap gap-3 mb-5">
                                             <button type="button"
                                                 class="btn btn-hover-solid bg-gold text-dark fw-bold py-2 px-4 d-flex align-items-center"
@@ -118,7 +54,7 @@
                                         </div>
 
                                         <!-- Services Box -->
-                                        <div class="table-responsive bg-white border border-secondary-subtle"
+                                        <div id="servicios" class="table-responsive bg-white border border-secondary-subtle"
                                             style="border-radius: 8px;">
                                             <table class="table align-middle mb-0 table-hover"
                                                 style="border-collapse: separate; border-spacing: 0;">
@@ -162,7 +98,7 @@
                                 </div>
                             </div>
                             <!-- Contenedor 2: Tarjeta Quote al lado de la primera -->
-                            <div class="col-12 col-xl-4">
+                            <div class="col-12 col-xl-4" id="galeria">
                                 <div class="card shadow rounded-4">
                                     <div class="card-body">
                                         <div class="container-fluid p-2 d-flex align-items-center ">
@@ -226,44 +162,46 @@
         <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="AgendarModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <form action="/create" method="POST">
+                <form action="/create" method="POST" class="w-100">
                     @csrf
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agenda tu cita</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <div class="modal-header text-white rounded-top-4" style="background-color: #161a23;">
+                            <h1 class="modal-title fs-5 font-serif text-gold" id="exampleModalLabel">Agenda tu cita</h1>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <label class="fw-semibold">Ingresa tu nombre</label>
-                                <input type="text" minlength="3" required placeholder="Nombre" name="nombre">
+                        <div class="modal-body p-4">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Ingresa tu nombre</label>
+                                <input type="text" class="form-control" minlength="3" required placeholder="Ej. Carlos Mendoza" name="nombre">
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Ingresa tu numero de contacto</label>
-                                <input type="string" minlength="13" maxlength="13" placeholder="000-000-0000"
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Ingresa tu numero de contacto</label>
+                                <input type="string" class="form-control" minlength="13" maxlength="13" placeholder="000-000-0000"
                                     name="telefono" required>
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Selecciona el dia de tu visita</label>
-                                <input type="date" name="fecha" required>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label fw-semibold">Día de visita</label>
+                                    <input type="date" class="form-control" name="fecha" required>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label fw-semibold">Horario</label>
+                                    <input type="time" class="form-control" name="hora" required>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Horario de visita</label>
-                                <input type="time" name="hora" required>
-                            </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Seleccione su servicio</label>
-                                <select name="servicios_id" id="servicios_id">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Seleccione su servicio</label>
+                                <select name="servicios_id" id="servicios_id" class="form-select" required>
                                     @foreach ($servicios as $item)
                                         <option value="{{$item->id}}">{{$item->nombreservicio}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Agendar</button>
+                        <div class="modal-footer border-0 pt-0 px-4 pb-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn bg-gold text-dark fw-bold px-4">Agendar cita</button>
                         </div>
                     </div>
                 </form>

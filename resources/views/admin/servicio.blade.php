@@ -5,105 +5,148 @@
 @endsection
 
 @section('contenido')
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                <div class="row aling-center">
-                    <div class="col-12 col-md-6">
-                        <h5>Mis servicios</h5>
+    <div class="container-fluid px-0">
+        <div class="card admin-module-card overflow-hidden">
+            <!-- Cabecera -->
+            <div class="card-header admin-module-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <h5 id="titulo-mis-servicios" class="admin-module-title mb-0">Mis servicios</h5>
+                    <span class="badge rounded-pill badge-count-pill">{{ count($servicios) }} registrados</span>
+                </div>
+
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <div class="admin-search-wrapper">
+                        <i class="bi bi-search admin-search-icon"></i>
+                        <input type="search" id="buscarServicioInput" class="form-control admin-search-input"
+                            placeholder="Filtrar servicios..." aria-label="Filtrar registros">
                     </div>
-                    <div class="col-12 col-md-6 px-0 px-md-3 d-flex justify-content-md-end">
-                        <button class="btn btn-custom-yellow rounded-pill p-1" data-bs-toggle="modal"
-                            data-bs-target="#AgregarModalServicio">
-                            <div class="d-flex align-items-center justify-content-center rounded-circle bg-dark me-1"
-                                style="width: 32px; height: 32px;">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <span class="me-2">Nuevo Usuario</span>
-                        </button>
-                    </div>
+
+                    <button type="button" class="btn btn-add-service d-inline-flex align-items-center gap-2 px-3"
+                        data-bs-toggle="modal" data-bs-target="#AgregarModalServicio">
+                        <i class="bi bi-plus-lg"></i>
+                        <span>Agregar servicio</span>
+                    </button>
                 </div>
             </div>
-        </div>
-        <div class="card-body border-top p-0 mt-3">
-            <div class="container-fluid">
-                <table class="table table-striped table-hover">
-                    <tr>
-                        <th>Nombre del servicio</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>tiempo(Min)</th>
-                        <th>Opc.</th>
-                    </tr>
-                    @foreach ($servicios as $item)
-                        <tr>
-                            <td>{{ $item->nombreservicio }}</td>
-                            <td>{{ $item->descripcion }}</td>
-                            <td>{{ $item->precio }}</td>
-                            <td>{{ $item->tiempo }}</td>
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <button class="btn btn-custom-deep-blue mx-1"data-bs-toggle="modal"
-                                        data-bs-target="#EditarModalServicio" data-id="{{ $item->id }}">
-                                        <i class="bi-pencil"></i>
-                                    </button>
-                                </div>
-                                <div class="btn-group">
-                                    <form action="/administrador/servicio/delete/{{ $item->id }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="btn-group">
-                                            <button type="submit">
-                                                <i class="bi bi-trash3-fill"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
 
-                </table>
+            <!-- Cuerpo de la tabla -->
+            <div class="card-body p-0">
+                <div class="table-responsive" tabindex="0" role="region" aria-labelledby="titulo-mis-servicios">
+                    <table class="table admin-table align-middle mb-0" id="tablaServicios">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-uppercase">Nombre del servicio</th>
+                                <th scope="col" class="text-uppercase">Descripción</th>
+                                <th scope="col" class="text-uppercase text-end">Precio</th>
+                                <th scope="col" class="text-uppercase text-end">Duración</th>
+                                <th scope="col" class="text-uppercase text-end">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($servicios as $item)
+                                <tr>
+                                    <td class="service-name-cell">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span>{{ $item->nombreservicio }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="service-desc-cell">{{ $item->descripcion }}</div>
+                                    </td>
+                                    <td class="text-end font-mono-tabular service-price-cell">
+                                        ${{ number_format((float) $item->precio, 2) }}
+                                    </td>
+                                    <td class="text-end font-mono-tabular">
+                                        <span class="badge-duration">
+                                            {{ str_contains(strtolower((string) $item->tiempo), 'min') ? $item->tiempo : $item->tiempo . ' min' }}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex align-items-center justify-content-end gap-2">
+                                            <button type="button"
+                                                class="btn btn-action-square btn-action-edit d-inline-flex align-items-center justify-content-center p-0"
+                                                data-bs-toggle="modal" data-bs-target="#EditarModalServicio"
+                                                data-id="{{ $item->id }}"
+                                                data-nombre="{{ $item->nombreservicio }}"
+                                                data-descripcion="{{ $item->descripcion }}"
+                                                data-precio="{{ $item->precio }}"
+                                                data-tiempo="{{ $item->tiempo }}"
+                                                title="Editar servicio"
+                                                aria-label="Editar {{ $item->nombreservicio }}">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+
+                                            <form action="/administrador/servicio/delete/{{ $item->id }}" method="POST"
+                                                class="d-inline-flex m-0">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="btn btn-action-square btn-action-delete d-inline-flex align-items-center justify-content-center p-0"
+                                                    title="Eliminar servicio"
+                                                    aria-label="Eliminar {{ $item->nombreservicio }}">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Pie de tarjeta -->
+            <div class="card-footer admin-module-footer d-flex flex-wrap align-items-center justify-content-between gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-info-circle text-gold"></i>
+                    <span>Mostrando <span id="serviciosMostrados">{{ count($servicios) }}</span> de {{ count($servicios) }} servicios registrados en el sistema</span>
+                </div>
             </div>
         </div>
 
 
         <!--Modal Editar Servicio-->
         <div class="modal fade" id="EditarModalServicio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            aria-labelledby="editarModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <form id="formEditarServicio" method="POST">
+                <form id="formEditarServicio" method="POST" class="w-100">
                     @method('PUT')
                     @csrf
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <div class="modal-header text-white rounded-top-4" style="background-color: #161a23;">
+                            <h1 class="modal-title fs-5 font-serif text-gold" id="editarModalLabel">Editar servicio</h1>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <label class="fw-semibold">Nombre del servicio</label>
-                                <input type="text" minlength="3" required placeholder="nombre" id="editarnombreservicio"
+                        <div class="modal-body p-4">
+                            <div class="mb-4">
+                                <label for="editarnombreservicio" class="form-label fw-semibold">Nombre del servicio</label>
+                                <input type="text" class="form-control" minlength="3" required
+                                    placeholder="Ej. Corte Clásico y Moderno" id="editarnombreservicio"
                                     name="nombreservicio">
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Descripcio</label>
-                                <textarea id="editardescripcion" cols="30" rows="6" required placeholder="describe el servicio"
-                                    name="descripcion"></textarea>
+                            <div class="mb-4">
+                                <label for="editardescripcion" class="form-label fw-semibold">Descripción</label>
+                                <textarea id="editardescripcion" class="form-control" rows="4" required
+                                    placeholder="Describe el servicio" name="descripcion"></textarea>
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Precio</label>
-                                <input type="number" required placeholder="00" name="precio" id="editarprecio">
-                            </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Tiempo del servicio</label>
-                                <input type="text" required minlength="1" placeholder="formato minutos" name="tiempo"
-                                    id="editartiempo">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label for="editarprecio" class="form-label fw-semibold">Precio</label>
+                                    <input type="number" class="form-control" required placeholder="00"
+                                        name="precio" id="editarprecio">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label for="editartiempo" class="form-label fw-semibold">Tiempo del servicio</label>
+                                    <input type="text" class="form-control" required minlength="1"
+                                        placeholder="Formato minutos" name="tiempo" id="editartiempo">
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <div class="modal-footer border-0 pt-0 px-4 pb-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn bg-gold text-dark fw-bold px-4">Actualizar</button>
                         </div>
                     </div>
                 </form>
@@ -113,39 +156,43 @@
 
         <!--Modal Agregar Servicio-->
         <div class="modal fade" id="AgregarModalServicio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            aria-labelledby="agregarModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <form action="/administrador/servicio/create" method="POST">
+                <form action="/administrador/servicio/create" method="POST" class="w-100">
                     @csrf
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <div class="modal-header text-white rounded-top-4" style="background-color: #161a23;">
+                            <h1 class="modal-title fs-5 font-serif text-gold" id="agregarModalLabel">Agregar servicio</h1>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <div class="input-group">
-                                <label class="fw-semibold">Nombre del servicio</label>
-                                <input type="text" minlength="3" required placeholder="nombre"
-                                    name="nombreservicio">
+                        <div class="modal-body p-4">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Nombre del servicio</label>
+                                <input type="text" class="form-control" minlength="3" required
+                                    placeholder="Ej. Corte Clásico y Moderno" name="nombreservicio">
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Descripcio</label>
-                                <textarea name="descripcion" cols="30" rows="6" required placeholder="describe el servicio"
-                                    name="descripcion"></textarea>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Descripción</label>
+                                <textarea class="form-control" rows="4" required
+                                    placeholder="Describe el servicio" name="descripcion"></textarea>
                             </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Precio</label>
-                                <input type="number" required placeholder="00" name="precio">
-                            </div>
-                            <div class="input-group">
-                                <label class="fw-semibold">Tiempo del servicio</label>
-                                <input type="text" required minlength="1" placeholder="formato minutos"
-                                    name="tiempo">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <label class="form-label fw-semibold">Precio</label>
+                                    <input type="number" class="form-control" required placeholder="00"
+                                        name="precio">
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <label class="form-label fw-semibold">Tiempo del servicio</label>
+                                    <input type="text" class="form-control" required minlength="1"
+                                        placeholder="Formato minutos" name="tiempo">
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        <div class="modal-footer border-0 pt-0 px-4 pb-4">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn bg-gold text-dark fw-bold px-4">Agregar</button>
                         </div>
                     </div>
                 </form>

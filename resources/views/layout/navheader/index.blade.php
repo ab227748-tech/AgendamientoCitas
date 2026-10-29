@@ -1,48 +1,51 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <span class="rounded-circle bg-warning d-inline-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
-        <i class="bi bi-scissors text-white fs-6"></i>
-      </span>
-      <span class="fw-bold text-dark">IMPERIUM</span>
-      <span class="text-muted fs-6 fw-light ms-1" style="letter-spacing: 1px;">BARBERSHOP</span>
+<nav class="navbar navbar-expand-md custom-navbar sticky-top">
+  <div class="container-fluid px-lg-5 px-3">
+    
+    <!-- Logo de marca -->
+    <a href="{{ url('/') }}" class="brand-logo">
+      <i class="bi bi-scissors brand-icon"></i>
+      <span>IMPERIUM <small style="font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 500; opacity: 0.85;">BARBERSHOP</small></span>
     </a>
 
     <!-- Botón Hamburguesa para celulares -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler border-0 shadow-none d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list fs-1 text-gold"></i>
     </button>
 
     <!-- Contenido colapsable -->
-    <div class="collapse navbar-collapse" id="navbarContenido">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3 align-items-lg-center">
-        <li class="nav-item">
-          <a class="nav-link active text-warning fw-bold" href="#">Inicio</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownServicios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarContenido">
+      
+      <!-- Enlaces de navegación -->
+      <div class="navbar-nav mx-auto align-items-center gap-1 my-3 my-md-0">
+        <a href="{{ url('/') }}" class="nav-link-custom">Inicio</a>
+        
+        <!-- Dropdown Servicios -->
+        <div class="dropdown">
+          <a class="nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Servicios
           </a>
-          <ul class="dropdown-menu shadow-sm border-0 rounded-3 py-2" aria-labelledby="navbarDropdownServicios">
-            <li><a class="dropdown-item" href="#">Corte clásico ($18)</a></li>
-            <li><a class="dropdown-item" href="#">Arreglo de barba ($14)</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Paquete completo (VIP $28)</a></li>
+          <ul class="dropdown-menu dropdown-menu-dark border-0 shadow-lg" style="background-color: #1A1F2B; border-radius: 8px;">
+            <li><a class="dropdown-item py-2 text-light" href="{{ url('/#servicios') }}">Corte Clásico & Moderno</a></li>
+            <li><a class="dropdown-item py-2 text-light" href="{{ url('/#servicios') }}">Arreglo de Barba Tradicional</a></li>
+            <li><hr class="dropdown-divider bg-secondary"></li>
+            <li><a class="dropdown-item py-2 text-warning fw-semibold" href="{{ url('/#servicios') }}">Paquete Imperium VIP</a></li>
           </ul>
-        </li>
+        </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Galería</a>
-        </li>
-      </ul>
+        <a href="{{ url('/#galeria') }}" class="nav-link-custom">Galería</a>
+      </div>
 
-      <!-- Botón Admin al final -->
-      <a href="/login" class="btn btn-outline-warning text-dark border-warning d-flex align-items-center justify-content-center gap-2 mt-3 mt-lg-0 ms-lg-3">
-        <i class="bi bi-shield-lock-fill text-warning"></i>
-        Acceso Admin
-      </a>
+      <!-- Boton Acceso Admin -->
+      <div class="text-center text-md-end">
+        <a href="/login" class="btn-admin-nav">
+          <i class="bi bi-shield-lock"></i>
+          <span>Panel Admin</span>
+        </a>
+      </div>
+
     </div>
+
   </div>
+</nav>
+
 </nav>
